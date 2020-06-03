@@ -1,5 +1,7 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import './2048.css';
+
 
 class Board extends React.Component{
     constructor(props)
@@ -333,9 +335,8 @@ class Board extends React.Component{
         return (
             <div>
                 <div id="main">
-                    <div className="button" onClick={this.newgame}>
-                        New Game
-                        </div>
+                    <div className="button" onClick={this.newgame}>New Game</div>
+                    <NavLink className="button" to="/tactoe">Play Xo</NavLink>
                     <div className="buttons">
                         <div className="button" onClick={this.moveup}>Up</div>
                         <div className="button" onClick={this.moveright}>Right</div>
