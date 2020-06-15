@@ -323,6 +323,7 @@ class Board extends React.Component{
     }
 
     handleTouchStart = (event)=>{
+        event.preventDefault();
         let swipestate = this.state.swipeDetect;
         let t = event.touches[0];
         swipestate.sX = t.screenX;
@@ -331,6 +332,7 @@ class Board extends React.Component{
     }
 
     handleTouchMove= (event)=>{
+        event.preventDefault();
         let swipestate = this.state.swipeDetect;
         let t = event.touches[0];
         swipestate.eX = t.screenX;
@@ -363,7 +365,7 @@ class Board extends React.Component{
                 this.movedown()
             }
         }
-        
+
         swipestate.sX= 0;
         swipestate.sY= 0;
         swipestate.eX= 0;
