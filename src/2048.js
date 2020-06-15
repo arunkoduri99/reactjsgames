@@ -17,6 +17,12 @@ class Board extends React.Component{
             newEl:{
                 row:false,
                 col:false
+            },
+            swipeDetect:{
+                sX:0,
+                sY:0,
+                eX:0,
+                eY:0,
             }
         };
         
@@ -46,22 +52,8 @@ class Board extends React.Component{
             this.newgame();
         }
     }
-/*     componentDidMount()
-    {
-        this.randomcells();
-    } */
+
     newgame = ()=>{
-        /* this.setState({
-            'board': [
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-                [0, 0, 0, 0],
-            ]
-        });
-        this.randomcells();
-        this.forceUpdate();
- */ 
         let gamestate = this.state;
         
         gamestate.board= [
@@ -74,6 +66,7 @@ class Board extends React.Component{
         this.randomcells();
         this.forceUpdate();
     }
+    
     randomcells = ()=>{
         const gamestate = this.state;
         let boardstate = gamestate.board;
@@ -99,7 +92,7 @@ class Board extends React.Component{
         this.forceUpdate();     
     }
     
-     randomStartingNumber() {
+    randomStartingNumber() {
         const startingNumbers = [2];
         const randomNumber = startingNumbers[Math.floor(Math.random() * startingNumbers.length)];
         return randomNumber;
@@ -329,6 +322,54 @@ class Board extends React.Component{
         }
     }
 
+    handleTouchStart = (event)=>{
+        let swipestate = this.state.swipeDetect;
+        let t = event.touches[0];
+        swipestate.sX = t.screenX;
+        swipestate.sY = t.screenY;
+        this.setState(swipestate);
+    }
+
+    handleTouchMove= (event)=>{
+        let swipestate = this.state.swipeDetect;
+        let t = event.touches[0];
+        swipestate.eX = t.screenX;
+        swipestate.eY = t.screenY;
+        this.setState(swipestate)
+    }
+
+    handleTouchEnd= (event)=>{
+        event.preventDefault();
+        let swipestate = this.state.swipeDetect;
+        let diffX = swipestate.sX - swipestate.eX;
+        let diffY = swipestate.sY - swipestate.eY;
+
+        if (Math.abs(diffX) > Math.abs(diffY)) {
+            // sliding horizontally
+            if (diffX > 0) {
+                // swiped left
+                this.moveleft()
+            } else {
+                // swiped right
+                this.moveright()
+            }
+        } else {
+            // sliding vertically
+            if (diffY > 0) {
+                // swiped up
+                this.moveup()
+            } else {
+                // swiped down
+                this.movedown()
+            }
+        }
+        
+        swipestate.sX= 0;
+        swipestate.sY= 0;
+        swipestate.eX= 0;
+        swipestate.eY= 0;
+        this.setState(swipestate);
+    }
     
     render()
     {
@@ -345,7 +386,7 @@ class Board extends React.Component{
                     </div>
                     <div className="score">
                     </div>
-                    <table>
+                    <table onTouchStart={touchStartEvent => this.handleTouchStart(touchStartEvent)} onTouchMove={touchMoveEvent => this.handleTouchMove(touchMoveEvent)} onTouchEnd={touchEndEvent => this.handleTouchEnd(touchEndEvent)}>
                         <tbody>
                             {
                                 this.state.board.map((board, row) => {

@@ -48,13 +48,13 @@ table {
 }
 
 .cell {
-  height: 100px;
-  width: 100px;
-  background-color: #303030;
+  height: 78px;
+  width: 72px;
   border-radius: 5px;
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
+  text-align: center;
 }
 
 .color-2 {
@@ -107,17 +107,17 @@ table {
 .number {
   color: #FFF;
   font-size: 35px;
+  transform: translateY(27%);
 }
 
 .score {
   text-align: center;
   margin-bottom: 20px;
 }
-.cell{ top: 50%;left: 50%;transform: translateX(-50%) translateY(-50%); position: relative;}
-.cell.new-el{ animation:newEl 0.5s; }
+.cell.new-el{ animation:newEl 0.3s ease; }
 .cell-parent{
-  width: 100px;
-  height: 100px;
+  width: 72px;
+  height: 78px;
   background-color: #303030;
   border-radius:5px;
 }
@@ -126,12 +126,10 @@ table {
     opacity: 0;
     width: 0;
     height: 0;
-    top: 50%;
-    left: 50%;
   }
   to{
     opacity: 1;
-    width: 100px;
-    height: 100px;
+    width: 72px;
+    height: 78px;
   }
 }

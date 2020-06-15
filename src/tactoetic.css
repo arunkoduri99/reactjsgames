@@ -43,9 +43,18 @@ ol, ul {
 
 .game {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .game-info {
-  margin-left: 20px;
+  /* margin-left: 20px; */
+}
+
+.btn {
+  background: #391ab3;
+  border: none;
+  padding: 7px 14px;
+  border-radius: 20px;
+  color: white;
+  margin: 4px auto;
 }

@@ -94,7 +94,7 @@ class Game extends React.Component {
         'Go to game start';
       return (
         <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
+          <button className="btn" onClick={() => this.jumpTo(move)}>{desc}</button>
         </li>
       );
     });
@@ -108,7 +108,7 @@ class Game extends React.Component {
 
     return (
       <Fragment>
-        <button onClick={()=>this.props.history.push('/')}>Go Back</button>
+        <button className="btn" onClick={()=>this.props.history.push('/')}> # Go Back</button>
         <div className="game">
           <div className="game-board">
             <Board
@@ -117,8 +117,9 @@ class Game extends React.Component {
             />
           </div>
           <div className="game-info">
-            <div>{status}</div>
-            <ol>{moves}</ol>
+            <h3 style={{color:'white'}}>{status}</h3>
+            <p style={{textAlign:'left',color:'white'}}>Moves : </p>
+            <ol style={{color:'white',listStyle:'none'}}>{moves}</ol>
           </div>
         </div>
       </Fragment>
